@@ -307,24 +307,24 @@ function renderDeck(){
     body=renderQuiz(t.quiz,accent,accentDeep);
   } else {
     body=`<h2 class="s-title">${slide.t}</h2>`;
-  (slide.body||[]).forEach(item=>{
-    if(typeof item==='string'){body+=`<p class="s-p">${item}</p>`;}
-    else if(Array.isArray(item)){body+='<ul class="s-ul">'+item.map(b=>`<li>${b}</li>`).join('')+'</ul>';}
-    else if(item.h&&item.rows){
-      body+='<table class="s-tbl"><thead><tr>'+item.h.map(h=>`<th>${h}</th>`).join('')+'</tr></thead><tbody>'+
-        item.rows.map(row=>'<tr>'+row.map(c=>`<td>${c}</td>`).join('')+'</tr>').join('')+'</tbody></table>';
-    }else if(item.label){body+=`<div class="s-lbl">${item.label}</div>`;}
-    else if(item.big){body+=`<div class="s-big">${item.big}</div>`;}
-    else if(item.note){body+=`<div class="s-note">ℹ️ ${item.note}</div>`;}
-    else if(item.warn){body+=`<div class="s-warn">⚠️ ${item.warn}</div>`;}
-    else if(item.quote){body+=`<div class="s-quote">${item.quote}</div>`;}
-    else if(item.src){body+=`<div class="s-src">📎 ${item.src}</div>`;}
-  });
+    (slide.body||[]).forEach(item=>{
+      if(typeof item==='string'){body+=`<p class="s-p">${item}</p>`;}
+      else if(Array.isArray(item)){body+='<ul class="s-ul">'+item.map(b=>`<li>${b}</li>`).join('')+'</ul>';}
+      else if(item.h&&item.rows){
+        body+='<table class="s-tbl"><thead><tr>'+item.h.map(h=>`<th>${h}</th>`).join('')+'</tr></thead><tbody>'+
+          item.rows.map(row=>'<tr>'+row.map(c=>`<td>${c}</td>`).join('')+'</tr>').join('')+'</tbody></table>';
+      }else if(item.label){body+=`<div class="s-lbl">${item.label}</div>`;}
+      else if(item.big){body+=`<div class="s-big">${item.big}</div>`;}
+      else if(item.note){body+=`<div class="s-note">ℹ️ ${item.note}</div>`;}
+      else if(item.warn){body+=`<div class="s-warn">⚠️ ${item.warn}</div>`;}
+      else if(item.quote){body+=`<div class="s-quote">${item.quote}</div>`;}
+      else if(item.src){body+=`<div class="s-src">📎 ${item.src}</div>`;}
+    });
   }
   main.innerHTML=`<div class="deck" style="--accent:${accent};--accent-deep:${accentDeep}">
     <div class="deck-hdr">
       <button class="back-btn" id="backBtn">← Back</button>
-      <span class="deck-crumb">${t.num} · ${slide.k||t.name}</span>
+      <span class="deck-crumb">${t.num} · ${isQuiz?'Knowledge Check':slide.k||t.name}</span>
     </div>
     <div class="deck-body">
       <div class="slide-pane">${body}</div>
